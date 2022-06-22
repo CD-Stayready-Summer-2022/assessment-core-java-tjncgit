@@ -69,9 +69,9 @@ public class PetOwnerTest {
     @Test
     public void isOwnerOfTest() {
         // Given
-        Pet newPet = new Dog();
-        Pet anotherPet = new Dog();
-        PetOwner po = new PetOwner("", newPet);
+        Pet newPet = new Dog("spot");
+        Pet anotherPet = new Dog("flash");
+        PetOwner po = new PetOwner("john", newPet);
 
         // When
         boolean outcome = po.isOwnerOf(newPet);

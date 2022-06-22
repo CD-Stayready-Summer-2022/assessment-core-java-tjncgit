@@ -1,5 +1,12 @@
 package com.codedifferently.assessment01.part01;
 
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static com.codedifferently.assessment01.part01.BasicStringUtils.reverse;
+import static com.codedifferently.assessment01.part01.BasicStringUtils.reverseThenCamelCase;
+
 public class StringUtils {
     /**
      * Get all the words in the sentence and return it in a string array
@@ -7,7 +14,21 @@ public class StringUtils {
      * @return
      */
     public static String[] getWords(String sentence){
-        return null;
+        ArrayList<String> out = new ArrayList<>();
+        int start = 0;
+        for(int i = 0; i < sentence.length(); i++) {
+            if(sentence.charAt(i) == ' ') {
+                out.add(sentence.substring(start, i));
+                start = i + 1;
+            } else if (i == sentence.length() - 1) {
+                out.add(sentence.substring(start, i + 1));
+            }
+        }
+        String[] arrOut = new String[out.size()];
+        for(int i = 0; i < arrOut.length; i++) {
+            arrOut[i] = out.get(i);
+        }
+        return arrOut;
     }
 
     /**
@@ -15,8 +36,15 @@ public class StringUtils {
      * @param sentence
      * @return
      */
-    public static String getFirstWord(String sentence){
-        return null;
+    public static String getFirstWord(String sentence) {
+        String out = "";
+        for (int i = 0; i < sentence.length(); i++) {
+            if (sentence.charAt(i) == ' ') {
+                out = sentence.substring(0, i);
+                break;
+            }
+        }
+        return out;
     }
 
     /**
@@ -25,7 +53,7 @@ public class StringUtils {
      * @return
      */
     public static String reverseFirstWord(String sentence){
-        return null;
+        return reverse(getFirstWord(sentence));
     }
 
     /**
@@ -33,7 +61,10 @@ public class StringUtils {
      * @param sentence
      * @return
      */
-    public static String reverseFirstWordThenCamelCase(String sentence){return null;}
+    public static String reverseFirstWordThenCamelCase(String sentence){
+
+        return reverseThenCamelCase(getFirstWord(sentence));
+    }
 
     /**
      * Remove Character at index
@@ -41,5 +72,15 @@ public class StringUtils {
      * @param index
      * @return
      */
-    public static String removeCharacterAtIndex(String str, int index){return null;}
+    public static String removeCharacterAtIndex(String str, int index){
+        StringBuilder out = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            if(i == index) {
+                continue;
+            } else {
+                out.append(str.charAt(i));
+            }
+        }
+        return out.toString();
+    }
 }

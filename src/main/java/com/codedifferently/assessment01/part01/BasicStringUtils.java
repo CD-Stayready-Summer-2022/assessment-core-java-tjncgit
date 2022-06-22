@@ -1,5 +1,8 @@
 package com.codedifferently.assessment01.part01;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class BasicStringUtils {
     /**
      * Remove Uppercase the first letter in each word, then remove all spaces
@@ -10,7 +13,22 @@ public class BasicStringUtils {
      * @param str
      * @return
      */
-    public static String camelCase(String str){return null;}
+    public static String camelCase(String str){
+        StringBuilder newStr = new StringBuilder();
+        for(int i = 0; i < str.length(); i++) {
+            if(i == 0) {
+                newStr.append(str.substring(i, i + 1).toUpperCase().charAt(0));
+            } else if (str.charAt(i) == ' ') {
+                newStr.append(str.substring(i + 1, i + 2).toUpperCase().charAt(0));
+                i+=1;
+            } else {
+                newStr.append(str.charAt(i));
+            }
+        }
+        Pattern p = Pattern.compile("\\s");
+        Matcher m = p.matcher(newStr);
+        return m.replaceAll("");
+    }
 
     /**
      * Reverse the string
@@ -19,7 +37,11 @@ public class BasicStringUtils {
      * @param str
      * @return
      */
-    public static String reverse(String str){return null;}
+    public static String reverse(String str){
+        StringBuilder out = new StringBuilder();
+        out.append(str);
+        return out.reverse().toString();
+    }
 
     /**
      * Camel case the first letter of every word, then reverse the string and remove all spaces
@@ -28,7 +50,13 @@ public class BasicStringUtils {
      * @param str
      * @return
      */
-    public static String reverseThenCamelCase(String str){ return null; }
+    public static String reverseThenCamelCase(String str){
+        String reverse = reverse(str);
+        return camelCase(reverse);
+    }
 
-    public static String removeFirstAndLastCharacter(String str){ return null; }
+    public static String removeFirstAndLastCharacter(String str){
+
+        return str.substring(1,str.length() - 1);
+    }
 }
